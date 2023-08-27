@@ -25,7 +25,7 @@ class ReservaPoltronas:
 
         self.botao_poltronas = []
         self.atualizar_poltronas()
-        
+
     def atualizar_poltronas(self, *args):
         filme_selecionado = self.filme_var.get()
         for botao in self.botao_poltronas:
@@ -33,7 +33,10 @@ class ReservaPoltronas:
 
         for i in range(self.num_poltronas):
             row, col = divmod(i, 10)
-            cor = "red" if i in self.poltronas_ocupadas[filme_selecionado] else "green"
+            if i in self.poltronas_ocupadas[filme_selecionado]:
+                cor = "red"
+            else:
+                cor = "green"
             botao = tk.Button(self.frame_poltronas, text=str(i+1), width=3, height=1, bg=cor, command=lambda idx=i: self.reservar_poltrona(idx))
             botao.grid(row=row+2, column=col)
             self.botao_poltronas.append(botao)
